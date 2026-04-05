@@ -320,7 +320,7 @@ nav {
   background: var(--white);
   padding: 28px 22px;
   border-top: 3px solid transparent;
-  transition: border-color .3s, transform .3s, box-shadow .3s;
+  transition: border-color .3s, transform .3s, box-shadow .3s, background .3s;
   cursor: default;
   display: flex;
   flex-direction: column;
@@ -328,8 +328,15 @@ nav {
 }
 .service-card:hover {
   border-color: var(--accent);
+  background: var(--accent);
   transform: translateY(-5px);
-  box-shadow: 0 16px 40px rgba(13,27,42,.12);
+  box-shadow: 0 16px 40px rgba(37,99,168,.35);
+}
+.service-card:hover .service-icon {
+  color: var(--white);
+}
+.service-card:hover h3 {
+  color: var(--white);
 }
 .service-icon {
   width: 38px; height: 38px; margin-bottom: 14px;
@@ -1087,6 +1094,149 @@ footer {
 }
 .hero-logo-text span { color: var(--accent2); }
 
+
+/* ── CAPABILITIES LIST ── */
+.capabilities-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+  margin-top: 48px;
+  padding-top: 40px;
+  border-top: 1px solid var(--grey2);
+}
+.cap-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+}
+.cap-dot {
+  color: var(--accent);
+  font-size: 20px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.cap-item strong {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--navy);
+}
+@media (max-width: 900px) {
+  .capabilities-list { grid-template-columns: 1fr; gap: 4px; }
+  .cap-item strong { font-size: 14px; }
+}
+
+
+/* ── PREMIER BUILDING SOLUTIONS SECTION ── */
+#premier-solutions {
+  background: var(--navy);
+  padding: 100px 60px;
+}
+#premier-solutions .section-label {
+  color: var(--accent2);
+  font-size: 13px;
+  letter-spacing: 5px;
+  margin-bottom: 12px;
+}
+#premier-solutions .section-title {
+  color: var(--white);
+  font-size: clamp(52px, 8vw, 100px);
+  letter-spacing: 2px;
+  margin-bottom: 52px;
+  line-height: 0.95;
+}
+.solutions-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.solution-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--grey2);
+  border: 1px solid rgba(255,255,255,0.18);
+  padding: 10px 20px;
+  transition: background .25s, color .25s, border-color .25s;
+  cursor: default;
+}
+.solution-tag:hover {
+  background: var(--accent);
+  color: var(--white);
+  border-color: var(--accent);
+}
+@media (max-width: 900px) {
+  #premier-solutions { padding: 70px 20px; }
+  .solution-tag { font-size: 12px; padding: 8px 14px; }
+}
+
+
+/* ── CANT FIND BANNER ── */
+.cant-find-banner {
+  background: var(--accent);
+  padding: 36px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.cant-find-banner h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 3px;
+  color: var(--white);
+}
+.cant-find-banner p {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  margin-top: 4px;
+}
+.cant-find-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--accent);
+  background: var(--white);
+  border: none; padding: 14px 36px;
+  cursor: pointer; white-space: nowrap;
+  transition: background .25s, color .25s;
+  flex-shrink: 0;
+}
+.cant-find-btn:hover { background: var(--navy); color: var(--white); }
+@media (max-width: 900px) {
+  .cant-find-banner { padding: 32px 20px; flex-direction: column; align-items: flex-start; gap: 20px; }
+  .cant-find-btn { width: 100%; text-align: center; }
+}
+
+
+/* ── PORTFOLIO HEADER TEXTS ── */
+.portfolio-tagline {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--accent2);
+  margin-bottom: 10px;
+  font-style: italic;
+}
+.portfolio-sub {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--grey3);
+  margin-bottom: 44px;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
   </style>
 </head>
 <body>
@@ -1164,12 +1314,12 @@ footer {
   </div>
 
     <div class="hero-content">
-      <p class="hero-tag" data-i18n="hero_tag">Idaho Falls</p>
+      <p class="hero-tag" data-i18n="hero_tag">Welcome to Level Up Premier Construction LLC</p>
       <h1 class="hero-title" data-i18n="hero_title">
-        Your next <em>project</em><br>starts here
+        Your Vision Is<br>Our <em>Blueprint</em>
       </h1>
       <p class="hero-sub" data-i18n="hero_sub">
-        Licensed and insured in 20 states. From excavation and foundation to final finishes — we handle every phase of your residential or commercial project with professional quality and safety first.
+        Our Logistics Is Your Peace Of Mind.
       </p>
       <div class="hero-actions">
         <a href="#contacto" class="btn-primary" data-i18n="hero_btn1">Get a Free Estimate</a>
@@ -1195,8 +1345,8 @@ footer {
 
   <!-- SERVICIOS -->
   <section id="servicios">
-    <p class="section-label" data-i18n="services_label">What We Do</p>
-    <h2 class="section-title" data-i18n="services_title">Our<br>Services</h2>
+    <p class="section-label" data-i18n="services_label">Our Capabilities</p>
+    <h2 class="section-title" data-i18n="services_title">Premier Building<br>Solutions</h2>
     <div class="services-grid">
 
       <div class="service-card">
@@ -1213,6 +1363,16 @@ footer {
           <line x1="14" y1="15" x2="14" y2="10"/>
         </svg>
         <h3>Excavation</h3>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 28 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 20h24"/>
+          <path d="M4 20V14h16v6"/>
+          <path d="M2 14h20"/>
+          <path d="M6 14v-4h12v4"/>
+          <path d="M8 10V6h8v4"/>
+        </svg>
+        <h3>Foundation</h3>
       </div>
       <div class="service-card">
         <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1288,7 +1448,7 @@ footer {
           <path d="M8 10 Q8 16 12 18 Q16 16 16 10 Z"/>
           <path d="M10 2 L14 2"/>
         </svg>
-        <h3>Construction Cleanup</h3>
+        <h3>Construction Clean Ups</h3>
       </div>
       <div class="service-card">
         <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1298,9 +1458,23 @@ footer {
       </div>
       <div class="service-card">
         <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 9V5"/>
+          <path d="M15 10.5l3-3"/>
+          <path d="M15 13.5l3 3"/>
+          <path d="M12 15v4"/>
+          <path d="M9 13.5l-3 3"/>
+          <path d="M9 10.5l-3-3"/>
+          <path d="M8 20h8"/>
+          <path d="M12 19v-4"/>
+        </svg>
+        <h3>Sprinkler System</h3>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <rect x="3" y="10" width="14" height="6" rx="2"/><circle cx="6" cy="18" r="2"/><circle cx="14" cy="18" r="2"/><path d="M17 13h2a2 2 0 000-4h-2"/><path d="M10 10V6l-3 4"/><path d="M2 21h20"/>
         </svg>
-        <h3>Mowing & Trimming</h3>
+        <h3>Mowing, Trimming, Edging & Blowing</h3>
       </div>
       <div class="service-card">
         <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1324,7 +1498,7 @@ footer {
         <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 3h16v19H4z"/><path d="M4 3h16"/><path d="M9 22V14h6v8"/><path d="M4 7h16"/><path d="M2 3h20M2 22h20"/>
         </svg>
-        <h3>Crown / Baseboards / Doors</h3>
+        <h3>Crown, Baseboard & Door Installation</h3>
       </div>
       <div class="service-card">
         <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1336,7 +1510,7 @@ footer {
         <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M2 18l4-12h12l4 12H2z"/><path d="M6 18l2-6M12 18V6M18 18l-2-6"/><path d="M4 14h16M5 10h14"/>
         </svg>
-        <h3>Carpet / Flooring / LVP</h3>
+        <h3>Carpet & LVP Flooring</h3>
       </div>
       <div class="service-card">
         <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1348,7 +1522,7 @@ footer {
         <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M2 20h20"/><path d="M6 20V10M18 20V10"/><path d="M2 10h20"/><path d="M2 10L12 3l10 7"/><path d="M9 20v-6h6v6"/>
         </svg>
-        <h3>Porches & Exterior</h3>
+        <h3>Porches & Exteriors</h3>
       </div>
       <div class="service-card">
         <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1391,7 +1565,7 @@ footer {
           <path d="M2 10 L4 12 L2 14"/>
           <path d="M22 10 L20 12 L22 14"/>
         </svg>
-        <h3>Exterior Cleanups</h3>
+        <h3>Exterior Clean Ups</h3>
       </div>
       <div class="service-card">
         <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1403,13 +1577,13 @@ footer {
         <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <rect x="3" y="12" width="18" height="4" rx="1"/><rect x="2" y="16" width="20" height="3" rx="1"/><path d="M7 12V6M12 12V4M17 12V7"/><path d="M5 9c2 0 3 2 5 2s3-2 5-2"/>
         </svg>
-        <h3>Granite</h3>
+        <h3>Granite Counter Tops</h3>
       </div>
       <div class="service-card">
         <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M3 20h18"/><ellipse cx="7" cy="17" rx="4" ry="2"/><ellipse cx="15" cy="17" rx="4" ry="2"/><ellipse cx="11" cy="13" rx="4" ry="2"/><ellipse cx="7" cy="9" rx="3" ry="2"/><ellipse cx="15" cy="10" rx="3" ry="2"/>
         </svg>
-        <h3>Exterior Rock Design</h3>
+        <h3>Exterior Stone Veneer</h3>
       </div>
       <div class="service-card">
         <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1421,15 +1595,26 @@ footer {
         <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <rect x="3" y="4" width="18" height="16" rx="1"/><rect x="3" y="4" width="18" height="3" rx="1" fill="currentColor" opacity=".2"/><path d="M6 7v13M18 7v13"/><path d="M3 11h18"/><path d="M3 15h18"/>
         </svg>
-        <h3>Veneer Plaster</h3>
+        <h3>Venetian Plaster</h3>
       </div>
     </div>
   </section>
 
+  <!-- CANT FIND BANNER -->
+  <div class="cant-find-banner">
+    <div>
+      <h3 data-i18n="cant_find_title">Can't Find What You're Looking For?</h3>
+      <p data-i18n="cant_find_sub">If it involves construction — we master it.</p>
+    </div>
+    <button class="cant-find-btn" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})" data-i18n="cant_find_btn">Contact Us Today</button>
+  </div>
+
   <!-- PORTAFOLIO -->
   <section id="portafolio">
-    <p class="section-label" data-i18n="portfolio_label">Our Work</p>
-    <h2 class="section-title" data-i18n="portfolio_title">Portfolio</h2>
+    <p class="section-label" data-i18n="portfolio_label">Premier Showcase</p>
+    <h2 class="section-title" data-i18n="portfolio_title">Commercial<br>Excellence</h2>
+    <p class="portfolio-tagline" data-i18n="portfolio_tagline"><em>Witness the Power of Elite Craftsmanship &amp; Execution</em></p>
+    <p class="portfolio-sub" data-i18n="portfolio_sub">Building the Infrastructure of Success — High-Scale Solutions for Idaho's Business Leaders</p>
     <div class="portfolio-categories">
 
       <!-- COMMERCIAL -->
@@ -1612,7 +1797,7 @@ footer {
       <p class="section-label" data-i18n="about_label">Who We Are</p>
       <h2 class="section-title" data-i18n="about_title">No project<br>too big,<br>no project<br>too small</h2>
       <p data-i18n="about_p1">Level Up Premier Construction LLC is a licensed and insured general contractor based in Idaho Falls. We specialize in residential and commercial construction across Idaho and Montana, always following regulatory codes and delivering professional-grade results.</p>
-      <p data-i18n="about_p2">Led by CEO Luis Hernandez, our team brings the right equipment, expertise, and work ethic to every job. We love giving peace of mind to our clients — and we always clean up after ourselves.</p>
+      <p data-i18n="about_p2">We master the delicate balance of large-scale renovations: we prioritize Investor ROI, simplify Management Oversight through strategic logistics, and guarantee Resident Satisfaction with our strict "Quiet & Clean" protocols. Dedicated to delivering residential and commercial excellence — from the first pour of the foundation to the final high-end finish — we handle every phase with integrity, safety, and premier quality. You set the goal — we deliver the key.</p>
       <div class="about-values">
         <div class="value-item">
           <h4 data-i18n="val1_title">Safety First</h4>
@@ -1782,9 +1967,9 @@ footer {
         nav_services: 'Services', nav_portfolio: 'Portfolio', nav_about: 'About',
         nav_process: 'Process', nav_areas: 'Service Areas', nav_contact: 'Contact',
         nav_cta: 'Free Estimate',
-        hero_tag: 'Idaho Falls',
-        hero_title: 'Your next<br><em>project</em><br>starts here',
-        hero_sub: 'Licensed and insured in 20 states. From excavation and foundation to final finishes — we handle every phase of your residential or commercial project with professional quality and safety first.',
+        hero_tag: 'Welcome to Level Up Premier Construction LLC',
+        hero_title: 'Your Vision Is<br>Our <em>Blueprint</em>',
+        hero_sub: 'Our Logistics Is Your Peace Of Mind.',
         hero_btn1: 'Get a Free Estimate', hero_btn2: 'View Our Services',
         stat_states: 'States', stat_licensed: 'Licensed', stat_support: 'Support',
         services_label: 'What We Do', services_title: 'Our<br>Services',
@@ -1800,13 +1985,18 @@ footer {
         svc5_desc: 'Year-round property care — mowing, trimming, blowing, and full landscape services in summer. Reliable snow removal in winter so your property stays safe and accessible.',
         svc6_title: 'Trash Removal and Cleanups',
         svc6_desc: 'We always clean up after ourselves. We also offer move-in/move-out services, full property cleanups, and trash removal — leaving every jobsite spotless when we are done.',
-        portfolio_label: 'Our Work', portfolio_title: 'Portfolio',
+        portfolio_label: 'Premier Showcase', portfolio_title: 'Commercial<br>Excellence',
+        portfolio_tagline: '<em>Witness the Power of Elite Craftsmanship &amp; Execution</em>',
+        portfolio_sub: "Building the Infrastructure of Success — High-Scale Solutions for Idaho's Business Leaders",
+        cant_find_title: "Can't Find What You're Looking For?",
+        cant_find_sub: 'If it involves construction — we master it.',
+        cant_find_btn: 'Contact Us Today',
         filter_all: 'All', filter_res: 'Residential', filter_com: 'Commercial', filter_conc: 'Concrete',
         areas_label: 'Where We Work', areas_title: 'Service<br>Areas',
         about_label: 'Who We Are',
         about_title: 'No project<br>too big,<br>no project<br>too small',
         about_p1: 'Level Up Premier Construction LLC is a licensed and insured general contractor based in Idaho Falls. We specialize in residential and commercial construction across Idaho and Montana, always following regulatory codes and delivering professional-grade results.',
-        about_p2: 'Led by CEO Luis Hernandez, our team brings the right equipment, expertise, and work ethic to every job. We love giving peace of mind to our clients — and we always clean up after ourselves.',
+        about_p2: 'We master the delicate balance of large-scale renovations: we prioritize Investor ROI, simplify Management Oversight through strategic logistics, and guarantee Resident Satisfaction with our strict "Quiet & Clean" protocols. Dedicated to delivering residential and commercial excellence — from the first pour of the foundation to the final high-end finish — we handle every phase with integrity, safety, and premier quality. You set the goal — we deliver the key.',
         val1_title: 'Safety First', val1_desc: 'Strict safety protocols and regulatory compliance on every jobsite, every day.',
         val2_title: 'Licensed and Insured', val2_desc: 'Fully licensed and insured in 20 states, giving you complete peace of mind.',
         val3_title: 'Professional Quality', val3_desc: 'Skilled tradespeople oriented toward excellence and clean, precise work.',
@@ -1835,12 +2025,12 @@ footer {
         nav_services: 'Servicios', nav_portfolio: 'Portafolio', nav_about: 'Nosotros',
         nav_process: 'Proceso', nav_areas: 'Areas de Servicio', nav_contact: 'Contacto',
         nav_cta: 'Estimado Gratis',
-        hero_tag: 'Idaho Falls',
-        hero_title: 'Tu proximo<br><em>proyecto</em><br>empieza aqui',
-        hero_sub: 'Licenciados y asegurados en 20 estados. Desde excavacion y cimientos hasta acabados finales — manejamos cada fase de tu proyecto residencial o comercial con calidad profesional y seguridad primero.',
+        hero_tag: 'Welcome to Level Up Premier Construction LLC',
+        hero_title: 'Tu Visión Es<br>Nuestro <em>Plan</em>',
+        hero_sub: 'Nuestra Logística Es Tu Tranquilidad.',
         hero_btn1: 'Obtener Estimado Gratis', hero_btn2: 'Ver Nuestros Servicios',
         stat_states: 'Estados', stat_licensed: 'Licenciados', stat_support: 'Soporte',
-        services_label: 'Lo Que Hacemos', services_title: 'Nuestros<br>Servicios',
+        services_label: 'Nuestras Capacidades', services_title: 'Premier Building<br>Solutions',
         svc1_title: 'Construccion Residencial',
         svc1_desc: 'Desde construcciones nuevas hasta remodelaciones completas — estructura, aislamiento, tablaroca, cinta, textura, pintura, zoclos, molduras, instalacion de puertas, closets, azulejo y ventanas.',
         svc2_title: 'Construccion Comercial',
@@ -1853,7 +2043,12 @@ footer {
         svc5_desc: 'Cuidado de propiedad todo el ano — corte de cesped, recorte, soplado y servicios completos de paisajismo en verano. Remocion confiable de nieve en invierno para mantener tu propiedad segura.',
         svc6_title: 'Remocion de Basura y Limpiezas',
         svc6_desc: 'Siempre limpiamos despues de nosotros. Tambien ofrecemos servicios de mudanza, limpiezas completas de propiedad y remocion de basura — dejando cada sitio impecable al terminar.',
-        portfolio_label: 'Nuestro Trabajo', portfolio_title: 'Portafolio',
+        portfolio_label: 'Muestra Premier', portfolio_title: 'Excelencia<br>Comercial',
+        portfolio_tagline: '<em>Sé testigo del Poder de la Artesanía &amp; Ejecución de Élite</em>',
+        portfolio_sub: 'Construyendo la Infraestructura del Éxito — Soluciones a Gran Escala para los Líderes Empresariales de Idaho',
+        cant_find_title: '¿No Encuentras Lo Que Buscas?',
+        cant_find_sub: 'Si involucra construcción — lo dominamos.',
+        cant_find_btn: 'Contáctanos Hoy',
         filter_all: 'Todos', filter_res: 'Residencial', filter_com: 'Comercial', filter_conc: 'Concreto',
         areas_label: 'Donde Trabajamos', areas_title: 'Areas de<br>Servicio',
         about_label: 'Quienes Somos',
