@@ -49,7 +49,7 @@ nav {
 
 .nav-logo {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 22px;
+  font-size: 27px;
   letter-spacing: 3px;
   color: var(--white);
 }
@@ -130,9 +130,9 @@ nav {
 
 /* ── HERO ── */
 #hero {
-  position: relative; min-height: 100vh;
+  position: relative; min-height: 115vh;
   display: flex; align-items: flex-end;
-  padding: 0 60px 100px;
+  padding: 0 60px 160px;
   background: var(--navy); overflow: hidden;
 }
 .hero-bg {
@@ -223,20 +223,34 @@ nav {
   100% { transform: translateX(120vw); opacity: 0; }
 }
 .hero-watermark {
-  width: 560px; height: 560px;
+  width: 440px; height: 440px;
   pointer-events: none;
+  flex-shrink: 0;
 }
 .hero-watermark img {
   width: 100%; height: 100%; object-fit: contain;
-  opacity: 0.55;
+  filter: brightness(0) invert(1) !important;
+  opacity: 0.9;
+  animation: none !important;
 }
-.hero-content { position: relative; z-index: 2; max-width: 840px; }
+.hero-content { position: relative; z-index: 5; max-width: 520px; }
 .hero-tag {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 13px; font-weight: 600;
-  letter-spacing: 4px; text-transform: uppercase;
-  color: var(--accent2); margin-bottom: 20px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 34px;
+  letter-spacing: 4px;
+  margin-bottom: 20px;
+  line-height: 0.85;
   opacity: 0; animation: fadeUp .8s .4s ease-out forwards;
+}
+.hero-tag-blue {
+  color: var(--accent2);
+  display: block;
+}
+.hero-tag-white {
+  color: var(--white);
+  display: block;
+  font-size: 27px;
+  letter-spacing: 3px;
 }
 .hero-title {
   font-family: 'Bebas Neue', sans-serif;
@@ -252,8 +266,10 @@ nav {
   opacity: 0; animation: fadeUp .9s .8s ease-out forwards;
 }
 .hero-actions {
-  margin-top: 44px; display: flex; gap: 16px; flex-wrap: wrap;
+  margin-top: 44px;
+  display: flex; gap: 16px; flex-wrap: wrap;
   opacity: 0; animation: fadeUp .9s 1s ease-out forwards;
+  position: relative; z-index: 5;
 }
 .btn-primary {
   font-family: 'Barlow Condensed', sans-serif;
@@ -277,20 +293,40 @@ nav {
 }
 .btn-outline:hover { border-color: var(--white); }
 .hero-stats {
-  position: absolute; bottom: 100px; right: 60px;
-  display: flex; gap: 48px;
+  position: absolute;
+  bottom: 44px; left: 0; right: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px 60px;
+  background: rgba(13,27,42,0.7);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  gap: 0;
   opacity: 0; animation: fadeUp .9s 1.2s ease-out forwards;
   z-index: 2;
 }
-.stat { text-align: right; }
+.stat {
+  text-align: center;
+  position: relative;
+  padding: 0 24px;
+}
+.stat:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 10%; bottom: 10%;
+  width: 1px;
+  background: rgba(255,255,255,0.15);
+}
 .stat-num {
-  font-family: 'Bebas Neue', sans-serif; font-size: 52px;
+  font-family: 'Bebas Neue', sans-serif; font-size: 46px;
   line-height: 1; color: var(--white); letter-spacing: 2px;
 }
 .stat-num span { color: var(--accent2); }
 .stat-label {
-  font-size: 12px; font-weight: 500;
-  letter-spacing: 2px; text-transform: uppercase; color: var(--grey3);
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 2.5px; text-transform: uppercase; color: var(--grey3);
+  margin-top: 4px;
 }
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(24px); }
@@ -681,7 +717,7 @@ footer {
   }
   .stat { text-align: left; }
   .stat-num { font-size: 34px; }
-  .hero-watermark { width: 260px; height: 260px; right: -20px; opacity: 0.1; }
+  .hero-watermark { width: 140px !important; height: 140px !important; opacity: 1 !important; }
   #servicios, #portafolio, #proceso, #areas { padding: 80px 24px; }
   #nosotros { padding: 0; }
   #contacto { padding: 0; }
@@ -718,7 +754,7 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    opacity: 0.7;
+    opacity: 1;
     margin-bottom: 24px;
     z-index: 2;
   }
@@ -759,18 +795,20 @@ footer {
   /* Stats below content */
   .hero-stats {
     position: relative !important;
-    bottom: auto; right: auto;
     width: 100%;
     display: flex;
     justify-content: space-around;
-    gap: 0;
-    margin-top: 32px;
+    flex-wrap: wrap;
+    gap: 12px 0;
+    padding: 16px 10px;
     opacity: 1; animation: none;
-    z-index: 2;
+    background: rgba(13,27,42,0.5);
+    border-radius: 4px;
   }
-  .stat { text-align: center; }
-  .stat-num { font-size: 32px; }
-  .stat-label { font-size: 11px; }
+  .stat { text-align: center; padding: 0 12px; }
+  .stat:not(:last-child)::after { display: none; }
+  .stat-num { font-size: 30px; }
+  .stat-label { font-size: 10px; }
 
   /* ── SERVICES MOBILE ── */
   #servicios, #portafolio, #proceso, #areas { padding: 60px 16px; }
@@ -1095,22 +1133,25 @@ footer {
 
 /* ── HERO LOGO TEXT ── */
 .hero-watermark-wrap {
-  position: absolute; right: -40px; top: 48%;
-  transform: translateY(-50%);
-  width: 560px;
+  position: absolute; right: 0px;
+  top: 48%;
+  transform: translateY(-55%);
+  width: 480px;
   z-index: 1; pointer-events: none;
   display: flex; flex-direction: column; align-items: center;
+  gap: 0;
 }
 .hero-logo-text {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 28px;
+  font-size: 26px;
   letter-spacing: 5px;
   color: var(--white);
   text-align: center;
-  margin-top: 10px;
+  margin-top: 0px;
   text-transform: uppercase;
   opacity: 1;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+  text-shadow: 0 2px 16px rgba(0,0,0,0.8);
+  white-space: nowrap;
 }
 .hero-logo-text span { color: var(--accent2); }
 
@@ -1197,41 +1238,65 @@ footer {
 
 /* ── CANT FIND BANNER ── */
 .cant-find-banner {
-  background: var(--accent);
-  padding: 36px 60px;
+  background: linear-gradient(135deg, #0d1b2a 0%, #1a1a2e 40%, #16213e 70%, #0f3460 100%);
+  border-top: 2px solid rgba(59,125,216,0.4);
+  border-bottom: 2px solid rgba(59,125,216,0.4);
+  padding: 44px 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 32px;
   flex-wrap: wrap;
+  position: relative;
+  overflow: hidden;
+}
+.cant-find-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 20px,
+    rgba(59,125,216,0.03) 20px,
+    rgba(59,125,216,0.03) 40px
+  );
 }
 .cant-find-banner h3 {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 28px;
-  letter-spacing: 3px;
+  font-size: 34px;
+  letter-spacing: 4px;
   color: var(--white);
+  position: relative;
 }
 .cant-find-banner p {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 2px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 3px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.85);
-  margin-top: 4px;
+  color: var(--accent2);
+  margin-top: 6px;
+  position: relative;
+  text-shadow: 0 0 20px rgba(59,125,216,0.6);
 }
 .cant-find-btn {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 14px; font-weight: 700;
+  font-size: 13px; font-weight: 700;
   letter-spacing: 3px; text-transform: uppercase;
-  color: var(--accent);
-  background: var(--white);
-  border: none; padding: 14px 36px;
+  color: var(--white);
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.5);
+  padding: 14px 36px;
   cursor: pointer; white-space: nowrap;
-  transition: background .25s, color .25s;
+  transition: background .25s, border-color .25s;
   flex-shrink: 0;
+  position: relative;
 }
-.cant-find-btn:hover { background: var(--navy); color: var(--white); }
+.cant-find-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
 @media (max-width: 900px) {
   .cant-find-banner { padding: 32px 20px; flex-direction: column; align-items: flex-start; gap: 20px; }
   .cant-find-btn { width: 100%; text-align: center; }
@@ -1257,13 +1322,149 @@ footer {
   line-height: 1.6;
 }
 
+
+/* ── SERVICES SECTION TITLE SWAP ── */
+.services-main-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(38px, 6vw, 72px);
+  line-height: 0.95;
+  color: var(--navy);
+  letter-spacing: 2px;
+  margin-bottom: 48px;
+}
+.services-sub-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+
+/* ── HERO LOCATION TAG ── */
+.hero-location {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  text-align: center;
+  padding: 10px 0 14px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 10px;
+  color: var(--accent2);
+  text-transform: uppercase;
+  z-index: 2;
+  opacity: 0.85;
+}
+@media (max-width: 900px) {
+  .hero-location {
+    font-size: 14px;
+    letter-spacing: 6px;
+    padding: 8px 0 10px;
+    position: relative;
+    margin-top: 8px;
+  }
+}
+
+
+/* ── MOBILE NAV FIXES ── */
+@media (max-width: 900px) {
+  .nav-right {
+    gap: 8px;
+  }
+  .nav-cta {
+    display: flex;
+    padding: 8px 12px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    white-space: nowrap;
+  }
+  .lang-btn {
+    padding: 6px 10px;
+    font-size: 12px;
+    gap: 5px;
+  }
+  #langCurrent {
+    display: inline;
+    font-size: 12px;
+  }
+  .lang-menu {
+    right: 0;
+    left: auto;
+    min-width: 130px;
+    z-index: 9999;
+  }
+  .lang-item {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+}
+@media (max-width: 400px) {
+  #langCurrent {
+    display: none;
+  }
+}
+
+
+/* ── HAMBURGER MENU ── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 1001;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  transition: all .3s;
+  border-radius: 2px;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 900px) {
+  .hamburger { display: flex; }
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 80px; left: 0; right: 0;
+    background: rgba(13,27,42,0.98);
+    backdrop-filter: blur(16px);
+    flex-direction: column;
+    padding: 20px 0;
+    z-index: 999;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .nav-links.open {
+    display: flex;
+  }
+  .nav-links li a {
+    display: block;
+    padding: 14px 28px;
+    font-size: 18px;
+    letter-spacing: 3px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+}
+
   </style>
 </head>
 <body>
 
   <!-- NAV -->
   <nav>
-    <ul class="nav-links">
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
       <li><a href="#servicios" data-i18n="nav_services">Services</a></li>
       <li><a href="#portafolio" data-i18n="nav_portfolio">Portfolio</a></li>
       <li><a href="#nosotros" data-i18n="nav_about">About</a></li>
@@ -1293,7 +1494,7 @@ footer {
           </li>
         </ul>
       </div>
-      <button class="nav-cta" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})" data-i18n="nav_cta">Free Estimate</button>
+      <button class="nav-cta" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})" data-i18n="nav_cta">Strategic Quote</button>
     </div>
   </nav>
 
@@ -1334,7 +1535,7 @@ footer {
   </div>
 
     <div class="hero-content">
-      <p class="hero-tag" data-i18n="hero_tag">Welcome to Level Up Premier Construction LLC</p>
+      <p class="hero-tag" data-i18n="hero_tag"><span class="hero-tag-blue">Elevate Your Vision</span><br><span class="hero-tag-white">Your Next Project Begins Here.</span></p>
       <h1 class="hero-title" data-i18n="hero_title">
         Your Vision Is<br>Our <em>Blueprint</em>
       </h1>
@@ -1342,31 +1543,38 @@ footer {
         Our Logistics Is Your Peace Of Mind.
       </p>
       <div class="hero-actions">
-        <a href="#contacto" class="btn-primary" data-i18n="hero_btn1">Get a Free Estimate</a>
-        <a href="#servicios" class="btn-outline" data-i18n="hero_btn2">View Our Services</a>
+        <a href="#contacto" class="btn-primary" data-i18n="hero_btn1">Request a Strategic Quote</a>
+        <a href="#servicios" class="btn-outline" data-i18n="hero_btn2">Explore Our Capabilities</a>
       </div>
     </div>
 
     <div class="hero-stats">
       <div class="stat">
         <div class="stat-num">20<span>+</span></div>
-        <div class="stat-label" data-i18n="stat_states">States</div>
+        <div class="stat-label" data-i18n="stat_states">States Covered</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">30<span>+</span></div>
+        <div class="stat-label" data-i18n="stat_associates">Master Associates</div>
       </div>
       <div class="stat">
         <div class="stat-num">100<span>%</span></div>
-        <div class="stat-label" data-i18n="stat_licensed">Licensed</div>
+        <div class="stat-label" data-i18n="stat_quality">Quality Assured</div>
       </div>
       <div class="stat">
         <div class="stat-num">24<span>/7</span></div>
-        <div class="stat-label" data-i18n="stat_support">Support</div>
+        <div class="stat-label" data-i18n="stat_support">Project Support</div>
       </div>
     </div>
+
+  <div class="hero-location" data-i18n="hero_location">Idaho Falls</div>
+
   </section>
 
   <!-- SERVICIOS -->
   <section id="servicios">
-    <p class="section-label" data-i18n="services_label">Our Capabilities</p>
-    <h2 class="section-title" data-i18n="services_title">Premier Building<br>Solutions</h2>
+    <p class="section-label services-sub-label" data-i18n="services_label">Premier Building Solutions</p>
+    <h2 class="section-title services-main-title" data-i18n="services_title">Our Capabilities</h2>
     <div class="services-grid">
 
       <div class="service-card">
@@ -1618,6 +1826,20 @@ footer {
         <h3>Venetian Plaster</h3>
       </div>
     </div>
+
+    <!-- Grouped Capabilities -->
+    <div class="capabilities-list">
+      <div class="cap-item"><span class="cap-dot">—</span><strong>Precision Excavation &amp; Grading</strong></div>
+      <div class="cap-item"><span class="cap-dot">—</span><strong>Structural Foundations &amp; Concrete Works</strong></div>
+      <div class="cap-item"><span class="cap-dot">—</span><strong>Professional Framing &amp; Metal Stud Framing</strong></div>
+      <div class="cap-item"><span class="cap-dot">—</span><strong>Complete Roofing, Siding &amp; Gutter Systems</strong></div>
+      <div class="cap-item"><span class="cap-dot">—</span><strong>Window &amp; Door Installation Services</strong></div>
+      <div class="cap-item"><span class="cap-dot">—</span><strong>Full-Service Plumbing &amp; Electrical Systems</strong></div>
+      <div class="cap-item"><span class="cap-dot">—</span><strong>Thermal Insulation &amp; Energy Efficiency</strong></div>
+      <div class="cap-item"><span class="cap-dot">—</span><strong>Expert Drywall, Taping &amp; Custom Texturing</strong></div>
+      <div class="cap-item"><span class="cap-dot">—</span><strong>Venetian Plaster &amp; Decorative Wall Finishes</strong></div>
+    </div>
+
   </section>
 
   <!-- CANT FIND BANNER -->
@@ -1895,7 +2117,7 @@ footer {
     <div class="process-steps">
       <div class="step">
         <div class="step-num">01</div>
-        <h3 data-i18n="step1_title">Free Estimate</h3>
+        <h3 data-i18n="step1_title">Strategic Quote</h3>
         <p data-i18n="step1_desc">Contact us by phone, text, or email and tell us about your project. We provide honest estimates at no cost.</p>
       </div>
       <div class="step">
@@ -1972,7 +2194,7 @@ footer {
       </div>
     </div>
     <div class="contact-right">
-      <h3 data-i18n="form_title">Request a Free Estimate</h3>
+      <h3 data-i18n="form_title">Request a Strategic Quote</h3>
       <div class="form-row">
         <div class="field">
           <label data-i18n="form_name">Name</label>
@@ -2035,12 +2257,13 @@ footer {
       en: {
         nav_services: 'Services', nav_portfolio: 'Portfolio', nav_about: 'About',
         nav_process: 'Process', nav_areas: 'Service Areas', nav_contact: 'Contact',
-        nav_cta: 'Free Estimate',
-        hero_tag: 'Welcome to Level Up Premier Construction LLC',
+        nav_cta: 'Strategic Quote',
+        hero_tag: '<span class="hero-tag-blue">Elevate Your Vision</span><br><span class="hero-tag-white">Your Next Project Begins Here.</span>',
         hero_title: 'Your Vision Is<br>Our <em>Blueprint</em>',
         hero_sub: 'Our Logistics Is Your Peace Of Mind.',
-        hero_btn1: 'Get a Free Estimate', hero_btn2: 'View Our Services',
-        stat_states: 'States', stat_licensed: 'Licensed', stat_support: 'Support',
+        hero_btn1: 'Request a Strategic Quote', hero_btn2: 'Explore Our Capabilities',
+        hero_location: 'Idaho Falls',
+        stat_states: 'States Covered', stat_workforce: 'Workforce', stat_associates: 'Master Associates', stat_quality: 'Quality Assured', stat_support: 'Project Support',
         services_label: 'What We Do', services_title: 'Our<br>Services',
         svc1_title: 'Residential Construction',
         svc1_desc: 'From ground-up builds to full remodels — framing, insulation, drywall, tape, texture, painting, baseboards, crown molding, door installation, closets, tile, and windows. We bring your dream home to life.',
@@ -2071,7 +2294,7 @@ footer {
         val3_title: 'Professional Quality', val3_desc: 'Skilled tradespeople oriented toward excellence and clean, precise work.',
         val4_title: 'Always Clean', val4_desc: 'We clean up after every shift. Your property is always left neat and respected.',
         process_label: 'How We Work', process_title: 'Our Process',
-        step1_title: 'Free Estimate', step1_desc: 'Contact us by phone, text, or email and tell us about your project. We provide honest estimates at no cost.',
+        step1_title: 'Strategic Quote', step1_desc: 'Contact us by phone, text, or email and tell us about your project. We provide honest estimates at no cost.',
         step2_title: 'Site Visit', step2_desc: 'We visit your property to assess the scope of work, dimensions, materials, and any regulatory requirements.',
         step3_title: 'Proposal and Contract', step3_desc: 'You receive a clear, itemized contract with timelines, materials, and pricing — no hidden costs.',
         step4_title: 'Construction', step4_desc: 'Our crew gets to work with the right equipment, following safety protocols and regulatory codes throughout.',
@@ -2080,7 +2303,7 @@ footer {
         contact_label: 'Contact Us', contact_title: 'Tell us<br>about your<br>next project',
         contact_sub: 'No project is too big or too small. Reach out by phone, text, or email — we will get back to you fast and provide a free, no-obligation estimate.',
         ci_phone: 'Call or Text', ci_email: 'Email', ci_office: 'Office', ci_facebook: 'Facebook',
-        form_title: 'Request a Free Estimate',
+        form_title: 'Request a Strategic Quote',
         form_name: 'Name', form_phone: 'Phone',
         form_email: 'Email Address', form_type: 'Type of Project',
         form_opt1: 'Residential Construction', form_opt2: 'Commercial Construction',
@@ -2094,11 +2317,12 @@ footer {
         nav_services: 'Servicios', nav_portfolio: 'Portafolio', nav_about: 'Nosotros',
         nav_process: 'Proceso', nav_areas: 'Areas de Servicio', nav_contact: 'Contacto',
         nav_cta: 'Estimado Gratis',
-        hero_tag: 'Welcome to Level Up Premier Construction LLC',
+        hero_tag: '<span class="hero-tag-blue">Elevate Your Vision</span><br><span class="hero-tag-white">Your Next Project Begins Here.</span>',
         hero_title: 'Tu Visión Es<br>Nuestro <em>Plan</em>',
         hero_sub: 'Nuestra Logística Es Tu Tranquilidad.',
-        hero_btn1: 'Obtener Estimado Gratis', hero_btn2: 'Ver Nuestros Servicios',
-        stat_states: 'Estados', stat_licensed: 'Licenciados', stat_support: 'Soporte',
+        hero_btn1: 'Obtener Estimado Gratis', hero_btn2: 'Explorar Nuestras Capacidades',
+        hero_location: 'Idaho Falls',
+        stat_states: 'Estados Cubiertos', stat_workforce: 'Fuerza Élite', stat_associates: 'Asociados Master', stat_quality: 'Calidad Garantizada', stat_support: 'Soporte 24/7',
         services_label: 'Nuestras Capacidades', services_title: 'Premier Building<br>Solutions',
         svc1_title: 'Construccion Residencial',
         svc1_desc: 'Desde construcciones nuevas hasta remodelaciones completas — estructura, aislamiento, tablaroca, cinta, textura, pintura, zoclos, molduras, instalacion de puertas, closets, azulejo y ventanas.',
@@ -2219,6 +2443,22 @@ footer {
     window.addEventListener('scroll', () => {
       const nav = document.querySelector('nav');
       nav.style.boxShadow = window.scrollY > 80 ? '0 4px 32px rgba(0,0,0,.4)' : 'none';
+    });
+
+
+    // ── HAMBURGER MENU ──
+    function toggleMenu() {
+      const btn = document.getElementById('hamburger');
+      const links = document.getElementById('navLinks');
+      btn.classList.toggle('open');
+      links.classList.toggle('open');
+    }
+    // Close menu when link clicked
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.addEventListener('click', () => {
+        document.getElementById('hamburger').classList.remove('open');
+        document.getElementById('navLinks').classList.remove('open');
+      });
     });
 
     // ── PORTFOLIO SHOW MORE ──
