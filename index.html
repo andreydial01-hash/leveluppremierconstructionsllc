@@ -2848,7 +2848,7 @@ footer {
     let currentLang = 'en';
 
     function toggleLangMenu(e) {
-      e.stopPropagation();
+      if (e) { e.stopPropagation(); e.preventDefault(); }
       document.getElementById('langDropdown').classList.toggle('open');
     }
 
@@ -2862,8 +2862,12 @@ footer {
       applyTranslations();
     }
 
-    document.addEventListener('click', () => {
-      document.getElementById('langDropdown').classList.remove('open');
+    // Close dropdown only when clicking outside of it
+    document.addEventListener('click', (e) => {
+      const dropdown = document.getElementById('langDropdown');
+      if (dropdown && !dropdown.contains(e.target)) {
+        dropdown.classList.remove('open');
+      }
     });
 
     function applyTranslations() {
@@ -3014,12 +3018,27 @@ footer {
     }
 
     // ── SERVICE AREAS STAGGER ANIMATION ──
-    const areaTags = document.querySelectorAll('.area-tag');
-    const areaObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const tags = entry.target.querySelectorAll('.area-tag');
-          tags.forEach((tag, i) => {
-            setTimeout(() => {
-              tag.style.transition = `opacity .4s ease, transform .4s ease, background .3s, color .3s, box-shadow .3s`;
-              tag.classList.add('visible')ble')
+    const areasGrid = document.querySelector('.areas-grid');
+    if (areasGrid) {
+      const areaObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const tags = entry.target.querySelectorAll('.area-tag');
+            tags.forEach((tag, i) => {
+              setTimeout(() => {
+                tag.style.opacity = '1';
+                tag.style.transform = 'translateY(0)';
+              }, i * 50);
+            });
+            areaObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.05 });
+      areaObserver.observe(areasGrid);
+    }
+
+    // Apply translations on load
+    applyTranslations();
+  </script>
+</body>
+</html>
