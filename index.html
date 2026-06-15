@@ -1730,6 +1730,20 @@ footer {
   .commitments-header { margin-bottom: 56px; }
 }
 
+
+.form-status {
+  margin-top: 14px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-align: center;
+  min-height: 18px;
+  transition: color .3s;
+}
+.form-status.success { color: #2a9d4a; }
+.form-status.error { color: #c0392b; }
+.form-status.sending { color: var(--accent); }
+
   </style>
 </head>
 <body>
@@ -2648,21 +2662,25 @@ footer {
       <div class="form-row">
         <div class="field">
           <label data-i18n="form_name">Name</label>
-          <input type="text" placeholder="Your full name"/>
+          <input type="text" id="f-name" data-i18n-ph="form_name_ph" placeholder="Your full name"/>
         </div>
         <div class="field">
           <label data-i18n="form_phone">Phone</label>
-          <input type="tel" placeholder="Your phone number"/>
+          <input type="tel" id="f-phone" data-i18n-ph="form_phone_ph" placeholder="Your phone number"/>
         </div>
       </div>
       <div class="field">
         <label data-i18n="form_email">Email Address</label>
-        <input type="email" placeholder="your@email.com"/>
+        <input type="email" id="f-email" data-i18n-ph="form_email_ph" placeholder="your@email.com"/>
+      </div>
+      <div class="field">
+        <label data-i18n="form_address">Job Site Address</label>
+        <input type="text" id="f-address" data-i18n-ph="form_address_ph" placeholder="Where the work will take place"/>
       </div>
       <div class="field">
         <label data-i18n="form_type">Type of Project</label>
-        <select>
-          <option value="">Select a service...</option>
+        <select id="f-type">
+          <option value="" data-i18n="form_opt0">Select a service...</option>
           <option data-i18n="form_opt1">Residential Construction</option>
           <option data-i18n="form_opt2">Commercial Construction</option>
           <option data-i18n="form_opt3">Excavation and Foundation</option>
@@ -2676,9 +2694,10 @@ footer {
       </div>
       <div class="field">
         <label data-i18n="form_msg">Project Details</label>
-        <textarea rows="4" placeholder="Tell us about your project — location, size, timeline, and any specific needs..."></textarea>
+        <textarea rows="4" id="f-message" data-i18n-ph="form_msg_ph" placeholder="Tell us about your project — size, timeline, and any specific needs..."></textarea>
       </div>
-      <button class="submit-btn" data-i18n="form_submit">Send Request — We Will Contact You Soon</button>
+      <button class="submit-btn" id="f-submit" onclick="submitForm()" data-i18n="form_submit">Send Request — We Will Contact You Soon</button>
+      <p id="f-status" class="form-status"></p>
     </div>
   </section>
 
@@ -2754,7 +2773,8 @@ footer {
         contact_sub: 'No project is too big or too small. Reach out by phone, text, or email — we will get back to you fast and provide a free, no-obligation estimate.',
         ci_phone: 'Call or Text', ci_email: 'Email', ci_office: 'Office', ci_facebook: 'Facebook',
         form_title: 'Request a Strategic Quote',
-        form_name: 'Name', form_phone: 'Phone',
+        form_name: 'Name', form_phone: 'Phone', form_address: 'Job Site Address',
+        form_name_ph: 'Your full name', form_phone_ph: 'Your phone number', form_email_ph: 'your@email.com', form_address_ph: 'Where the work will take place', form_msg_ph: 'Tell us about your project — size, timeline, and any specific needs...', form_opt0: 'Select a service...',
         form_email: 'Email Address', form_type: 'Type of Project',
         form_opt1: 'Residential Construction', form_opt2: 'Commercial Construction',
         form_opt3: 'Excavation and Foundation', form_opt4: 'Interior Finishes / Remodel',
@@ -2762,6 +2782,7 @@ footer {
         form_opt7: 'Snow Removal', form_opt8: 'Trash Removal / Cleanup', form_opt9: 'Other',
         form_msg: 'Project Details',
         form_submit: 'Send Request — We Will Contact You Soon',
+        form_sending: 'Sending your request...', form_success: 'Thank you! We received your request and will contact you soon.', form_error: 'Something went wrong. Please call or text us at 208-607-6441.', form_err_required: 'Please fill in your name, phone, and email.',
       },
       es: {
         nav_services: 'Servicios', nav_portfolio: 'Portafolio', nav_about: 'Nosotros',
@@ -2921,6 +2942,64 @@ footer {
         document.getElementById('navLinks').classList.remove('open');
       });
     });
+
+
+    // ── SUPABASE CONTACT FORM ──
+    const SUPABASE_URL = 'YOUR_SUPABASE_URL';      // e.g. https://xxxx.supabase.co
+    const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+
+    async function submitForm() {
+      const btn = document.getElementById('f-submit');
+      const status = document.getElementById('f-status');
+      const t = translations[currentLang];
+
+      const data = {
+        name: document.getElementById('f-name').value.trim(),
+        phone: document.getElementById('f-phone').value.trim(),
+        email: document.getElementById('f-email').value.trim(),
+        address: document.getElementById('f-address').value.trim(),
+        project_type: document.getElementById('f-type').value.trim(),
+        message: document.getElementById('f-message').value.trim()
+      };
+
+      // Basic validation
+      if (!data.name || !data.phone || !data.email) {
+        status.className = 'form-status error';
+        status.textContent = t.form_err_required;
+        return;
+      }
+
+      btn.disabled = true;
+      status.className = 'form-status sending';
+      status.textContent = t.form_sending;
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/contacts`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (res.ok) {
+          status.className = 'form-status success';
+          status.textContent = t.form_success;
+          ['f-name','f-phone','f-email','f-address','f-message'].forEach(id => document.getElementById(id).value = '');
+          document.getElementById('f-type').selectedIndex = 0;
+        } else {
+          throw new Error('Request failed');
+        }
+      } catch (err) {
+        status.className = 'form-status error';
+        status.textContent = t.form_error;
+      } finally {
+        btn.disabled = false;
+      }
+    }
 
     // ── PORTFOLIO SHOW MORE ──
     function toggleGallery(btn) {
